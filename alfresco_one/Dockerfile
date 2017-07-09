@@ -18,7 +18,7 @@ ENV ALF_BIN alfresco-community-installer-201704-linux-x64.bin
 ENV ALF_URL http://eu.dl.alfresco.com.s3.amazonaws.com/release/community/201704-build-00019/$ALF_BIN
 ENV ALF_INSTALL_OPTIONS_FILE install_options.txt
 ENV ALF_INSTALLER_DIR /alfresco/installer
-ENV ALFRESCO_HOME /opt/alfresco-one
+ENV ALFRESCO_HOME /opt/alfresco-community
 ENV ALF_PROPS_FILE $ALFRESCO_HOME/tomcat/shared/classes/alfresco-global.properties
 
 
@@ -77,10 +77,7 @@ ADD dev-log4j.properties $ALFRESCO_HOME/tomcat/shared/classes/alfresco/extension
 
 # Deploy custom war files
 #ADD *.war $ALFRESCO_HOME/tomcat/webapps/
-
-# Install a license file if one exists
-#ADD *.lic $ALFRESCO_HOME/tomcat/shared/classes/alfresco/extension/license/
-
+ 
 # Use instead of alfresco.sh -- but it will invoke it.
 # This is only when starting the container, it is fine to run alfresco.sh to start and stop
 # Alfresco once the container has been initialised.
