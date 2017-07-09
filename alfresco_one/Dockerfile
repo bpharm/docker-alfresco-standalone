@@ -64,7 +64,7 @@ WORKDIR $ALFRESCO_HOME
 
 
 RUN mkdir /alfresco/data
-RUN sed -i 's:^[ \t]*dir.root[ \t]*=\([ \t]*.*\)$:dir.root='/alfresco/data':' $ALF_PROPS_FILE
+RUN sed -i 's:^[ \t]*dir.root[ \t]*=\([ \t]*.*\)$:dir.root='${ALFRESCO_HOME}/alf_data':' $ALF_PROPS_FILE
 
 # Change dir.keystore to point to installed keystore - would be nicer to ADD the keystore
 # to the data volume
