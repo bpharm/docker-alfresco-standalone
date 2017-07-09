@@ -2,5 +2,9 @@ version: '2'
 services:
   alfresco:
     build: alfresco_one
+    environment:
+      ALF_HOSTNAME: "104.199.19.121"
+      AWS_ACCESS_KEY_ID: "XXX"
+      AWS_SECRET_ACCESS_KEY: "XXXX"
     ports:
       - "80:8080"

@@ -14,6 +14,7 @@
 FROM ubuntu:14.04
 
 MAINTAINER Maksim Karpychev <kodermax@gmail.com>
+
 ENV ALF_BIN alfresco-community-installer-201704-linux-x64.bin
 ENV ALF_URL http://eu.dl.alfresco.com.s3.amazonaws.com/release/community/201704-build-00019/$ALF_BIN
 ENV ALF_INSTALL_OPTIONS_FILE install_options.txt

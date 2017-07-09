@@ -3,10 +3,8 @@
 ###
 # Fix properties in alfresco-global.properties
 ###
-# If we run with externally mapped port other than 8080, then that should be
-# dealt with as well.
-sed -i 's:^[ \t]*alfresco.host[ \t]*=\([ \t]*.*\)$:alfresco.host='$(hostname)':' $ALF_PROPS_FILE
-sed -i 's:^[ \t]*share.host[ \t]*=\([ \t]*.*\)$:share.host='$(hostname)':' $ALF_PROPS_FILE
+sed -i 's:^[ \t]*alfresco.host[ \t]*=\([ \t]*.*\)$:alfresco.host='$ALF_HOSTNAME':' $ALF_PROPS_FILE
+sed -i 's:^[ \t]*share.host[ \t]*=\([ \t]*.*\)$:share.host='$ALF_HOSTNAME':' $ALF_PROPS_FILE
 
 # Start alfresco (exits immediately running the server as a daemon)
 $ALFRESCO_HOME/alfresco.sh start
