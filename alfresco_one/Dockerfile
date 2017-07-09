@@ -36,7 +36,8 @@ RUN apt-get update && apt install -y \
     libxinerama1 \
     unzip \
     vim \
-    curl
+    curl \
+    mc
 
 RUN mkdir -p $ALF_INSTALLER_DIR
 
