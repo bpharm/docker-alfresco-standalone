@@ -71,6 +71,13 @@ RUN sed -i 's:^[ \t]*dir.root[ \t]*=\([ \t]*.*\)$:dir.root='${ALFRESCO_HOME}/alf
 # to the data volume
 RUN sed -i 's:^[ \t]*dir.keystore[ \t]*=\([ \t]*.*\)$:dir.keystore='${ALFRESCO_HOME}/alf_data/keystore':' $ALF_PROPS_FILE
 
+RUN echo "\n" >> $ALF_PROPS_FILE
+RUN echo "authentication.chain=external1:external,alfrescoNtlm1:alfrescoNtlm" >> $ALF_PROPS_FILE
+RUN echo "ntlm.authentication.sso.enabled=true" >> $ALF_PROPS_FILE
+RUN echo "external.authentication.defaultAdministratorUserNames=admin" >> $ALF_PROPS_FILE
+RUN echo "external.authentication.enabled=true" >> $ALF_PROPS_FILE
+RUN echo "external.authentication.proxyHeader=X-Alfresco-Remote-User" >> $ALF_PROPS_FILE
+RUN echo "external.authentication.proxyUserName=" >> $ALF_PROPS_FILE
 # Ensure a log file exists ready for tail
 RUN touch $ALFRESCO_HOME/alfresco.log
 
