@@ -54,7 +54,7 @@ WORKDIR $ALF_INSTALLER_DIR
 # Removing the ALF_INSTALLER_BIN at the end of this command doesn't stop the COPY above from creating its 829.4MB
 # layer, but it does stop the chmod from resulting in a further 829.4MB addition (since the file isn't there
 # to commit the change against)
-RUN chmod +x $ALF_BIN && ./$ALF_BIN --optionfile $ALF_INSTALL_OPTIONS_FILE && rm $ALF_INSTALLER_BIN
+RUN chmod +x $ALF_BIN && ./$ALF_BIN --optionfile $ALF_INSTALL_OPTIONS_FILE && rm $ALF_BIN
 
 EXPOSE 8080 7070 5701
 
