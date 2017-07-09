@@ -35,7 +35,8 @@ RUN apt-get update && apt install -y \
     libxext6 \
     libxinerama1 \
     unzip \
-    vim
+    vim \
+    curl
 
 RUN mkdir -p $ALF_INSTALLER_DIR
 
