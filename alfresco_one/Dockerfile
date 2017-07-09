@@ -14,8 +14,8 @@
 FROM ubuntu:14.04
 
 MAINTAINER Maksim Karpychev <kodermax@gmail.com>
-
-ENV ALF_INSTALLER_BIN http://eu.dl.alfresco.com.s3.amazonaws.com/release/community/201704-build-00019/alfresco-community-installer-201704-linux-x64.bin
+ENV ALF_BIN alfresco-community-installer-201704-linux-x64.bin
+ENV ALF_URL http://eu.dl.alfresco.com.s3.amazonaws.com/release/community/201704-build-00019/$ALF_BIN
 ENV ALF_INSTALL_OPTIONS_FILE install_options.txt
 ENV ALF_INSTALLER_DIR /alfresco/installer
 ENV ALFRESCO_HOME /opt/alfresco-one
@@ -43,7 +43,7 @@ RUN mkdir -p $ALF_INSTALLER_DIR
 # doing it with ADD or COPY results in a layer being added to the image. Only
 # way I know of avoiding this at present is to use curl to download the installer from somewhere,
 # run it and delete it, but all in a *single* RUN directive.
-COPY $ALF_INSTALLER_BIN $ALF_INSTALLER_DIR/
+RUN curl -o $ALF_INSTALLER_DIR/$ALF_BIN $ALF_URL
 COPY $ALF_INSTALL_OPTIONS_FILE $ALF_INSTALLER_DIR/
 
 WORKDIR $ALF_INSTALLER_DIR
