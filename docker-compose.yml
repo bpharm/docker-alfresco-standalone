@@ -1,0 +1,6 @@
+version: '1'
+services:
+  alfresco:
+    build: alfresco_one
+    ports:
+      - "8080:80"
