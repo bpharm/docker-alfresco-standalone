@@ -86,7 +86,9 @@ ADD dev-log4j.properties $ALFRESCO_HOME/tomcat/shared/classes/alfresco/extension
 
 # Deploy custom war files
 #ADD *.war $ALFRESCO_HOME/tomcat/webapps/
- 
+ СOPY assets/amps $ALFRESCO_HOME/amps
+ RUN set -x \
+	&& bash $ALFRESCO_HOME/bin/apply_amps.sh -force
 # Use instead of alfresco.sh -- but it will invoke it.
 # This is only when starting the container, it is fine to run alfresco.sh to start and stop
 # Alfresco once the container has been initialised.
