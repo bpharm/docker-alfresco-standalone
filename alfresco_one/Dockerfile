@@ -99,6 +99,7 @@ ADD dev-log4j.properties $ALFRESCO_HOME/tomcat/shared/classes/alfresco/extension
 #ADD *.war $ALFRESCO_HOME/tomcat/webapps/
 
 COPY assets/amps $ALFRESCO_HOME/amps
+COPY assets/amps_share $ALFRESCO_HOME/amps_share
 COPY assets/config/share-config-custom.xml $ALF_SHARE_CONFIG_PATH
 
 RUN set -x \
