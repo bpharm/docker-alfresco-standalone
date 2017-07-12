@@ -1,7 +1,13 @@
 version: '3.3'
 services:
   alfresco:
-    build: alfresco_one
+    build: 
+      context: ./alfresco_one
+      args:
+        - awsAccessKey=xxx
+        - awsSecretKey=xxx
+        - awsRegionName=eu-central-1
+        - awsS3BucketName=alfresco-certificates
     env_file: .env
     ports:
       - "80:8080"

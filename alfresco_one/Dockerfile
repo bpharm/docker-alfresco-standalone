@@ -21,7 +21,10 @@ ENV ALF_INSTALL_OPTIONS_FILE install_options.txt
 ENV ALF_INSTALLER_DIR /alfresco/installer
 ENV ALFRESCO_HOME /opt/alfresco-community
 ENV ALF_PROPS_FILE $ALFRESCO_HOME/tomcat/shared/classes/alfresco-global.properties
-
+ARG awsAccessKey
+ARG awsSecretKey
+ARG awsRegionName
+ARG awsS3BucketName
 
 # Install OpenOffice requirements and other utils
 RUN apt-get update && apt install -y \
@@ -78,10 +81,10 @@ RUN echo "external.authentication.defaultAdministratorUserNames=admin" >> $ALF_P
 RUN echo "external.authentication.enabled=true" >> $ALF_PROPS_FILE
 RUN echo "external.authentication.proxyHeader=X-Alfresco-Remote-User" >> $ALF_PROPS_FILE
 RUN echo "external.authentication.proxyUserName=" >> $ALF_PROPS_FILE
-RUN echo "aws.accessKey=${AWS_ACCESS_KEY_ID}" >> $ALF_PROPS_FILE 
-RUN echo "aws.secretKey=${AWS_SECRET_ACCESS_KEY}" >> $ALF_PROPS_FILE
-RUN echo "aws.regionName=${AWS_REGION_NAME}"  >> $ALF_PROPS_FILE
-RUN echo "aws.s3.bucketName=${AWS_S3_BUCKET_NAME}" >> $ALF_PROPS_FILE
+RUN echo "aws.accessKey=$awsAccessKey" >> $ALF_PROPS_FILE 
+RUN echo "aws.secretKey=$awsSecretKey" >> $ALF_PROPS_FILE
+RUN echo "aws.regionName=$awsRegionName"  >> $ALF_PROPS_FILE
+RUN echo "aws.s3.bucketName=$awsS3BucketName" >> $ALF_PROPS_FILE
 # Ensure a log file exists ready for tail
 RUN touch $ALFRESCO_HOME/alfresco.log
 
