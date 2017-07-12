@@ -8,6 +8,8 @@ services:
         - awsSecretKey=xxx
         - awsRegionName=eu-central-1
         - awsS3BucketName=alfresco-certificates
+        - alfrescoRepoServer=104.199.19.121
+        - alfrescoRepoPort=80
     env_file: .env
     ports:
       - "80:8080"

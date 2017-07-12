@@ -1,3 +1,4 @@
 #!/bin/bash
-sed -i "s/@@ALF_HOSTNAME@@/$ALF_HOSTNAME/g" $ALF_SHARE_CONFIG_FILE
-sed -i "s/@@ALF_ALFRESCO_PORT@@/$ALF_ALFRESCO_PORT/g" $ALF_SHARE_CONFIG_FILE
+
+sed -i "s/@@ALFRESCO_REPO_SERVER@@/$alfrescoRepoServer/g" $ALF_SHARE_CONFIG_FILE
+sed -i "s/@@ALFRESCO_REPO_PORT@@/$alfrescoRepoPort/g" $ALF_SHARE_CONFIG_FILE

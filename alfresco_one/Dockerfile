@@ -27,6 +27,8 @@ ARG awsAccessKey
 ARG awsSecretKey
 ARG awsRegionName
 ARG awsS3BucketName
+ARG alfrescoRepoServer
+ARG alfrescoRepoPort
 
 # Install OpenOffice requirements and other utils
 RUN apt-get update && apt install -y \
