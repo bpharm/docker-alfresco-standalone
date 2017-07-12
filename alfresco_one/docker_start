@@ -5,8 +5,8 @@
 ###
 sed -i 's:^[ \t]*alfresco.host[ \t]*=\([ \t]*.*\)$:alfresco.host='$ALF_HOSTNAME':' $ALF_PROPS_FILE
 sed -i 's:^[ \t]*share.host[ \t]*=\([ \t]*.*\)$:share.host='$ALF_HOSTNAME':' $ALF_PROPS_FILE
-sed -i 's:^[ \t]*alfresco.port[ \t]*=\([ \t]*.*\)$:alfresco.host='$ALF_ALFRESCO_PORT':' $ALF_PROPS_FILE
-sed -i 's:^[ \t]*share.port[ \t]*=\([ \t]*.*\)$:share.host='$ALF_SHARE_PORT':' $ALF_PROPS_FILE
+sed -i 's:^[ \t]*alfresco.port[ \t]*=\([ \t]*.*\)$:alfresco.port='$ALF_ALFRESCO_PORT':' $ALF_PROPS_FILE
+sed -i 's:^[ \t]*share.port[ \t]*=\([ \t]*.*\)$:share.port='$ALF_SHARE_PORT':' $ALF_PROPS_FILE
 
 # Start alfresco (exits immediately running the server as a daemon)
 $ALFRESCO_HOME/alfresco.sh start
