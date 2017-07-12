@@ -21,6 +21,8 @@ ENV ALF_INSTALL_OPTIONS_FILE install_options.txt
 ENV ALF_INSTALLER_DIR /alfresco/installer
 ENV ALFRESCO_HOME /opt/alfresco-community
 ENV ALF_PROPS_FILE $ALFRESCO_HOME/tomcat/shared/classes/alfresco-global.properties
+ENV ALF_SHARE_CONFIG_FILE $ALFRESCO_HOME/tomcat/shared/classes/alfresco/web-extension/share-config-custom.xml
+ENV ALF_SHARE_CONFIG_PATH $ALFRESCO_HOME/tomcat/shared/classes/alfresco/web-extension/
 ARG awsAccessKey
 ARG awsSecretKey
 ARG awsRegionName
@@ -95,14 +97,19 @@ ADD dev-log4j.properties $ALFRESCO_HOME/tomcat/shared/classes/alfresco/extension
 #ADD *.war $ALFRESCO_HOME/tomcat/webapps/
 
 COPY assets/amps $ALFRESCO_HOME/amps
+COPY assets/config/share-config-custom.xml $ALF_SHARE_CONFIG_PATH
 
 RUN set -x \
 	&& bash $ALFRESCO_HOME/bin/apply_amps.sh -force
 # Use instead of alfresco.sh -- but it will invoke it.
 # This is only when starting the container, it is fine to run alfresco.sh to start and stop
 # Alfresco once the container has been initialised.
+
+ADD docker_setup $ALFRESCO_HOME/    
 ADD docker_start $ALFRESCO_HOME/
 RUN chmod +x $ALFRESCO_HOME/docker_start
-
+RUN chmod +x $ALFRESCO_HOME/docker_setup
+RUN set -x \
+	&& bash $ALFRESCO_HOME/docker_setup
 # Run the container's process!
 CMD /bin/bash -c $ALFRESCO_HOME/docker_start
