@@ -8,7 +8,6 @@ COPY . ./
 RUN dotnet publish -c Release -o out
 
 COPY --from=build-env /app/out ./
-EXPOSE 80
 ENTRYPOINT ["dotnet", "alfresco-proxy.dll"]
 
 
