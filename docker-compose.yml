@@ -19,3 +19,13 @@ services:
       - .:/src
     working_dir: /src
     command: /bin/bash -c "dotnet restore ./alfresco-proxy/alfresco-proxy.sln && dotnet publish ./alfresco-proxy/alfresco-proxy.sln -c Release -o ./obj/Docker/publish"
+  alfresco-proxy:
+    image: alfresco-proxy
+    build:
+      context: ./alfresco-proxy/alfresco-proxy
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:5004
+    ports:
+      - "5100:5004"
