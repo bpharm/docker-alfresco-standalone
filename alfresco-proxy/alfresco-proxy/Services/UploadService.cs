@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Globalization;
+using System.IO;
 
 namespace AlfrescoProxy.Services
 {
@@ -22,6 +23,7 @@ namespace AlfrescoProxy.Services
             var multiContent = new MultipartFormDataContent();
             var fileData = Convert.FromBase64String(file.FileContent);
             var bytes = new ByteArrayContent(fileData);
+            file.FileName = Path.ChangeExtension(file.FileName, Path.GetExtension(file.FileName).ToLower());
             multiContent.Add(bytes, "filedata", file.FileName);
             multiContent.Add(new StringContent("name"), file.FileName);
             var result = await client.PostAsync(file.UploadUrl, multiContent);
