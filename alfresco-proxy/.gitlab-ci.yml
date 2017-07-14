@@ -1,0 +1,19 @@
+image: microsoft/aspnetcore-build:1.1.2
+
+before_script:
+    - apt-get -qq update
+    - apt-get -y install rsync
+stages:
+    - deploy
+job_deploy:
+  stage: deploy
+  only:
+    - master
+  script:
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - dotnet restore alfresco-proxy/
+    - dotnet publish alfresco-proxy/ -c Release -o publish
+    - bash deploy.sh

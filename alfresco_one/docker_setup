@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sed -i "s/@@ALFRESCO_REPO_SERVER@@/$alfrescoRepoServer/g" $ALF_SHARE_CONFIG_FILE
+sed -i "s/@@ALFRESCO_REPO_PORT@@/$alfrescoRepoPort/g" $ALF_SHARE_CONFIG_FILE
