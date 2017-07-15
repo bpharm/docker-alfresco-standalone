@@ -18,8 +18,5 @@ services:
     build:
       context: ./alfresco-proxy/alfresco-proxy
       dockerfile: Dockerfile
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://0.0.0.0:80
     ports:
       - "5100:80"
