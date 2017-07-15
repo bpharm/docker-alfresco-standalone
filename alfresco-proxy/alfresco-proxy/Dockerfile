@@ -13,7 +13,7 @@ FROM microsoft/aspnetcore:1.1.2
 WORKDIR /app
 COPY --from=build-env /app/out .
 EXPOSE 80
-ENTRYPOINT ["dotnet", "alfresco-proxy.dll"]
+ENTRYPOINT ["dotnet", "AlfrescoProxy.dll"]
 
 
 
