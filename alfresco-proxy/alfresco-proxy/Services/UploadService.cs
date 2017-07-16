@@ -15,6 +15,10 @@ namespace AlfrescoProxy.Services
 {
     public class UploadService: IUploadService
     {
+        private string CleanFileName(string fileName)
+        {
+            return Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(), string.Empty));
+        }
         public async Task<object> Upload(AlfrescoFile file)
         {
             var client = new HttpClient();
@@ -24,6 +28,8 @@ namespace AlfrescoProxy.Services
             var fileData = Convert.FromBase64String(file.FileContent);
             var bytes = new ByteArrayContent(fileData);
             file.FileName = Path.ChangeExtension(file.FileName, Path.GetExtension(file.FileName).ToLower());
+            //validate filename 
+            file.FileName = CleanFileName(file.FileName);
             multiContent.Add(bytes, "filedata", file.FileName);
             multiContent.Add(new StringContent("name"), file.FileName);
             var result = await client.PostAsync(file.UploadUrl, multiContent);
