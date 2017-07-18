@@ -97,7 +97,7 @@ namespace AlfrescoProxy.Services
             var item = JObject.Parse(response);
             var props = new JObject
             {
-                ["sc:type"] = file.Type,
+                ["sc:type"] = !string.IsNullOrEmpty(file.Type) ? file.Type : "Неизвестный",
                 ["cm:title"] = file.FileName
             };
            
