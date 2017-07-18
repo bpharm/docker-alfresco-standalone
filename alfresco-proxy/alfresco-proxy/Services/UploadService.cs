@@ -85,7 +85,7 @@ namespace AlfrescoProxy.Services
                     break;
 
             }
-            var fileName = prefix + DateTime.Now.ToString("yyyyMMdd_Hmm");
+            var fileName = prefix + DateTime.Now.ToString("yyyyMMdd_Hmmss");
             multiContent.Add(bytes, "filedata", fileName);
             multiContent.Add(new StringContent("name"), fileName);
             var result = await client.PostAsync(file.UploadUrl, multiContent);
@@ -97,23 +97,23 @@ namespace AlfrescoProxy.Services
             var item = JObject.Parse(response);
             var props = new JObject
             {
-                ["dc:type"] = file.Type,
+                ["sc:type"] = file.Type,
                 ["cm:title"] = file.FileName
             };
            
             if (!string.IsNullOrEmpty(file.Date))
             {
                 var date = DateTime.ParseExact(file.Date, "dd.MM.yyyy", CultureInfo.InvariantCulture);
-                props["dc:date"] = date.ToString("yyyy-MM-dd");
+                props["sc:date"] = date.ToString("yyyy-MM-dd");
             }
             if (!string.IsNullOrEmpty(file.Expired))
             {
                 var expired = DateTime.ParseExact(file.Expired, "dd.MM.yyyy", CultureInfo.InvariantCulture);
-                props["dc:expired"] = expired.ToString("yyyy-MM-dd");
+                props["sc:expired"] = expired.ToString("yyyy-MM-dd");
             }
             var o = new JObject
             {
-                ["nodeType"] = "dc:series",
+                ["nodeType"] = "sc:series",
                 ["properties"] = props,
             };
             var json = o.ToString();
