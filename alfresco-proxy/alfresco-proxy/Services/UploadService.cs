@@ -17,7 +17,8 @@ namespace AlfrescoProxy.Services
     {
         private string CleanFileName(string fileName)
         {
-            return Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(), string.Empty));
+            var result = Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(), string.Empty));
+            return result.Replace("/", string.Empty).Replace("\\", string.Empty).Replace(":", string.Empty).Replace("?", string.Empty).Trim();
         }
         public async Task<object> Upload(AlfrescoFile file)
         {
