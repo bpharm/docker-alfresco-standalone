@@ -28,11 +28,66 @@ namespace AlfrescoProxy.Services
             var multiContent = new MultipartFormDataContent();
             var fileData = Convert.FromBase64String(file.FileContent);
             var bytes = new ByteArrayContent(fileData);
-            file.FileName = Path.ChangeExtension(file.FileName, Path.GetExtension(file.FileName).ToLower());
             //validate filename 
-            file.FileName = CleanFileName(file.FileName);
-            multiContent.Add(bytes, "filedata", file.FileName);
-            multiContent.Add(new StringContent("name"), file.FileName);
+            var prefix = "un_";
+            switch (file.Type)
+            {
+                case "Сертификат качества":
+                    prefix = "cq_";
+                    break;
+                case "Сертификат анализа":
+                    prefix = "ca_";
+                    break;
+                case "Декларация":
+                    prefix = "d_";
+                    break;
+                case "Сертификат производителя (русский язык)":
+                    prefix = "mc_";
+                    break;
+                case "Регистрационное удостоверение":
+                    prefix = "rc_";
+                    break;
+                case "Сертификат соответствия":
+                    prefix = "cc_";
+                    break;
+                case "Протокол анализа":
+                    prefix = "ap_";
+                    break;
+                case "Сертификат соответствия РОСТЕСТ":
+                    prefix = "ссr_";
+                    break;
+                case "Информационное письмо":
+                    prefix = "im_";
+                    break;
+                case "Гигиенический сертификат":
+                    prefix = "hc_";
+                    break;
+                case "Паспорт":
+                    prefix = "p_";
+                    break;
+                case "Договор":
+                    prefix = "a_";
+                    break;
+                case "Протокол разногласий":
+                    prefix = "drp_";
+                    break;
+                case "Доверенность":
+                    prefix = "pa_";
+                    break;
+                case "Доп. соглашения к договору":
+                    prefix = "ea_";
+                    break;
+                case "Аналитический Лист":
+                    prefix = "as_";
+                    break;
+                case "Акт о забраковке":
+                    prefix = "ra_";
+                    break;
+
+            }
+            var fileName = prefix + DateTime.Now.ToString("yyyyMMdd_Hmm");
+            multiContent.Add(bytes, "filedata", fileName);
+            multiContent.Add(new StringContent("name"), fileName);
             var result = await client.PostAsync(file.UploadUrl, multiContent);
             if (result.StatusCode != System.Net.HttpStatusCode.Created)
             {
@@ -42,22 +97,24 @@ namespace AlfrescoProxy.Services
             var item = JObject.Parse(response);
             var props = new JObject
             {
-                ["sc:type"] = file.Type
+                ["dc:type"] = file.Type,
+                ["cm:title"] = file.FileName
             };
+           
             if (!string.IsNullOrEmpty(file.Date))
             {
                 var date = DateTime.ParseExact(file.Date, "dd.MM.yyyy", CultureInfo.InvariantCulture);
-                props["sc:date"] = date.ToString("yyyy-MM-dd");
+                props["dc:date"] = date.ToString("yyyy-MM-dd");
             }
             if (!string.IsNullOrEmpty(file.Expired))
             {
                 var expired = DateTime.ParseExact(file.Expired, "dd.MM.yyyy", CultureInfo.InvariantCulture);
-                props["sc:expired"] = expired.ToString("yyyy-MM-dd");
+                props["dc:expired"] = expired.ToString("yyyy-MM-dd");
             }
             var o = new JObject
             {
-                ["nodeType"] = "sc:series",
-                ["properties"] = props
+                ["nodeType"] = "dc:series",
+                ["properties"] = props,
             };
             var json = o.ToString();
             var url = file.ShareUrl + item["entry"]["id"];
