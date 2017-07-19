@@ -98,23 +98,23 @@ namespace AlfrescoProxy.Services
             var item = JObject.Parse(response);
             var props = new JObject
             {
-                ["dc:type"] = !string.IsNullOrEmpty(file.Type) ? file.Type : "Неизвестный",
+                ["sc:type"] = !string.IsNullOrEmpty(file.Type) ? file.Type : "Неизвестный",
                 ["cm:title"] = file.FileName
             };
            
             if (!string.IsNullOrEmpty(file.Date))
             {
                 var date = DateTime.ParseExact(file.Date, "dd.MM.yyyy", CultureInfo.InvariantCulture);
-                props["dc:date"] = date.ToString("yyyy-MM-dd");
+                props["sc:date"] = date.ToString("yyyy-MM-dd");
             }
             if (!string.IsNullOrEmpty(file.Expired))
             {
                 var expired = DateTime.ParseExact(file.Expired, "dd.MM.yyyy", CultureInfo.InvariantCulture);
-                props["dc:expired"] = expired.ToString("yyyy-MM-dd");
+                props["sc:expired"] = expired.ToString("yyyy-MM-dd");
             }
             var o = new JObject
             {
-                ["nodeType"] = "dc:series",
+                ["nodeType"] = "sc:series",
                 ["properties"] = props,
             };
             var json = o.ToString();
