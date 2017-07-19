@@ -86,7 +86,7 @@ namespace AlfrescoProxy.Services
 
             }
             var rnd = new Random();
-            var fileName = prefix + DateTime.Now.ToString("yyyyMMddHmm_" + rnd.Next(1,100)) + Path.GetExtension(file.FileName).ToLower();
+            var fileName = prefix + DateTime.Now.ToString("yyyyMMddHmm_" + rnd.Next(1, 9999)) + Path.GetExtension(file.FileName).ToLower();
             multiContent.Add(bytes, "filedata", fileName);
             multiContent.Add(new StringContent("name"), fileName);
             var result = await client.PostAsync(file.UploadUrl, multiContent);
