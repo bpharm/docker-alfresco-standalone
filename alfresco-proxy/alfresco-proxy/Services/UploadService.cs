@@ -29,63 +29,64 @@ namespace AlfrescoProxy.Services
             var fileData = Convert.FromBase64String(file.FileContent);
             var bytes = new ByteArrayContent(fileData);
             //validate filename 
-            var prefix = "un_";
+            var prefix = "UN_";
             switch (file.Type)
             {
                 case "Сертификат качества":
-                    prefix = "cq_";
+                    prefix = "CQ_";
                     break;
                 case "Сертификат анализа":
-                    prefix = "ca_";
+                    prefix = "CA_";
                     break;
                 case "Декларация":
-                    prefix = "d_";
+                    prefix = "D_";
                     break;
                 case "Сертификат производителя (русский язык)":
-                    prefix = "mc_";
+                    prefix = "MC_";
                     break;
                 case "Регистрационное удостоверение":
-                    prefix = "rc_";
+                    prefix = "RC_";
                     break;
                 case "Сертификат соответствия":
-                    prefix = "cc_";
+                    prefix = "CC_";
                     break;
                 case "Протокол анализа":
-                    prefix = "ap_";
+                    prefix = "AP_";
                     break;
                 case "Сертификат соответствия РОСТЕСТ":
-                    prefix = "ссr_";
+                    prefix = "CCR_";
                     break;
                 case "Информационное письмо":
-                    prefix = "im_";
+                    prefix = "IM_";
                     break;
                 case "Гигиенический сертификат":
-                    prefix = "hc_";
+                    prefix = "HC_";
                     break;
                 case "Паспорт":
-                    prefix = "p_";
+                    prefix = "P_";
                     break;
                 case "Договор":
-                    prefix = "a_";
+                    prefix = "A_";
                     break;
                 case "Протокол разногласий":
-                    prefix = "drp_";
+                    prefix = "DRP_";
                     break;
                 case "Доверенность":
-                    prefix = "pa_";
+                    prefix = "PA_";
                     break;
                 case "Доп. соглашения к договору":
-                    prefix = "ea_";
+                    prefix = "EA_";
                     break;
                 case "Аналитический Лист":
-                    prefix = "as_";
+                    prefix = "AS_";
                     break;
                 case "Акт о забраковке":
-                    prefix = "ra_";
+                    prefix = "RA_";
                     break;
 
             }
-            var fileName = prefix + DateTime.Now.ToString("yyyyMMdd_Hmmss");
+            var rnd = new Random();
+            var fileName = prefix + DateTime.Now.ToString("yyyyMMddHmm_" + rnd.Next(1,100));
             multiContent.Add(bytes, "filedata", fileName);
             multiContent.Add(new StringContent("name"), fileName);
             var result = await client.PostAsync(file.UploadUrl, multiContent);
