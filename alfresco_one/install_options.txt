@@ -4,9 +4,9 @@ enable-components=javaalfresco,libreofficecomponent,alfrescosolr4
 disable-components=postgres,alfrescosolr,alfrescowcmqs,alfrescogoogledocs
 
 # Use JDBC settings for an existing database
-jdbc_url=jdbc:postgresql://104.199.51.107:5432/alfresco2
+jdbc_url=jdbc:postgresql://104.199.51.107:5432/alfresco7
 jdbc_driver=org.postgresql.Driver
-jdbc_database=alfresco2
+jdbc_database=alfresco7
 jdbc_username=postgres
 jdbc_password=alfresco
 

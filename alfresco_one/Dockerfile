@@ -29,6 +29,8 @@ ARG awsRegionName
 ARG awsS3BucketName
 ARG alfrescoRepoServer
 ARG alfrescoRepoPort
+ARG hbAccessKey
+ARG hbSecretKey
 
 # Install OpenOffice requirements and other utils
 RUN apt-get update && apt install -y \
@@ -88,6 +90,8 @@ RUN echo "aws.accessKey=$awsAccessKey" >> $ALF_PROPS_FILE
 RUN echo "aws.secretKey=$awsSecretKey" >> $ALF_PROPS_FILE
 RUN echo "aws.regionName=$awsRegionName"  >> $ALF_PROPS_FILE
 RUN echo "aws.s3.bucketName=$awsS3BucketName" >> $ALF_PROPS_FILE
+RUN echo "hb.accessKey=$hbAccessKey" >> $ALF_PROPS_FILE 
+RUN echo "hb.secretKey=$hbSecretKey" >> $ALF_PROPS_FILE
 # Ensure a log file exists ready for tail
 RUN touch $ALFRESCO_HOME/alfresco.log
 
