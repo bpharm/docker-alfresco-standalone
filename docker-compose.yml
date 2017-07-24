@@ -10,7 +10,7 @@ services:
         - awsS3BucketName=alfresco-certificates
         - hbAccessKey=xxx
         - hbSecretKey=xxx
-        - alfrescoRepoServer=104.199.19.121
+        - alfrescoRepoServer=35.189.67.18
         - alfrescoRepoPort=80
     env_file: .env
     ports:
